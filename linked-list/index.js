@@ -98,14 +98,38 @@ class SinglyLinkedList {
         this.length++;
         return true;
     }
+    remove(index) {
+        if (index < 0 || index >= this.length) return undefined;
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+        let prevNode = this.get(index - 1);
+        let removed = prevNode.next;
+        prevNode.next = removed.next;
+        this.length--;
+        return removed;
+    }
+    reverse() {
+        let head = this.head;
+        this.head = this.tail;
+        this.tail = head;
 
-
+        let prev = null;
+        let next = null;
+        for (let i = 0; i < this.length; i++) {
+            next = head.next
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return this
+    }
 }
 
 let list = new SinglyLinkedList();
-list.push("Hello")
-list.push("World");
-list.push("HEY")
-list.insert(2, "HI")
 
-console.log(list.get(2))
+list.push(123);
+list.push(100);
+list.push(312);
+list.push(444);
+
+console.log(list.reverse())
