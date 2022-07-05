@@ -104,17 +104,15 @@ class DoublyLinkedList {
     if (index < 0 || index > this.lenght) {
       return false;
     } else if (index === 0) {
-      return this.unshift(value);
+      return !!this.unshift(value);
     } else if (index === this.lenght) {
-      return this.push(value);
+      return !!this.push(value);
     } else {
       let newNode = new Node(value);
       let beforeInsertNode = this.get(index - 1);
       let afterIntertNode = beforeInsertNode.next;
-      beforeInsertNode.next = newNode;
-      newNode.prev = beforeInsertNode;
-      newNode.next = afterIntertNode;
-      afterIntertNode.prev = newNode;
+      beforeInsertNode.next = newNode, newNode.prev = beforeInsertNode;
+      newNode.next = afterIntertNode, afterIntertNode.prev = newNode;
       this.lenght++;
     }
     return true;
